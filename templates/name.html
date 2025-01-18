@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이름 입력</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .name-form {
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .name-input-container {
+            display: flex;
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .lastname-input {
+            width: 30%;
+            padding: 12px;
+            border: 2px solid #4CAF50;
+            border-radius: 12px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .firstname-input {
+            width: 70%;
+            padding: 12px;
+            border: 2px solid #4CAF50;
+            border-radius: 12px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .lastname-input:focus,
+        .firstname-input:focus {
+            outline: none;
+            border-color: #45a049;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>순이의 이름을 입력해주세용</h1>
+    <form class="name-form" action="/start" method="POST">
+        <div class="name-input-container">
+            <input type="text" name="lastname" class="lastname-input" placeholder="성" maxlength="1" required
+                autocomplete="off">
+            <input type="text" name="firstname" class="firstname-input" placeholder="이름" maxlength="2" required
+                autocomplete="off">
+        </div>
+        <button type="submit" class="start-button">시작하기</button>
+    </form>
+</body>
+
+</html>

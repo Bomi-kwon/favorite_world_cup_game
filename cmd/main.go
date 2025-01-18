@@ -2,6 +2,7 @@ package main
 
 import (
 	"favorite_world_cup/handler"
+	"favorite_world_cup/service"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,7 +17,8 @@ func main() {
 	// 정적 파일 제공
 	r.Static("/static", "./static")
 
-	h := handler.NewHandler()
+	svc := service.NewService()
+	h := handler.NewHandler(svc)
 	h.RegisterRoutes(r)
 
 	// 서버 실행 (기본 포트: 8080)

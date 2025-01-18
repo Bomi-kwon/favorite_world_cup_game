@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이상형 월드컵</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="game-container">
+        <h1><span class="username">{{ .username }}</span>씨의 이상형 월드컵</h1>
+        <div class="round-info">{{ .currentRound }}</div>
+        <div class="progress">
+            <div class="progress-bar" style="width: {{ .progress }}%"></div>
+        </div>
+        <div class="candidates-container">
+            {{ range .candidates }}
+            <div class="candidate" onclick="selectCandidate('{{ .id }}')">
+                <img src="{{ .image }}" alt="{{ .name }}">
+                <div class="name">{{ .name }}</div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+
+    <script src="/static/js/action.js"></script>
+</body>
+
+</html>
