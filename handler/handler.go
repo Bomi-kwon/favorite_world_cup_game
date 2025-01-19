@@ -8,13 +8,12 @@ import (
 )
 
 type Handler struct {
-	svc *service.Service
+	game *service.Game
 }
 
-func NewHandler(svc *service.Service) *Handler {
-	return &Handler{
-		svc: svc,
-	}
+func NewHandler() *Handler {
+	game := service.NewGame()
+	return &Handler{game: game}
 }
 
 func (h *Handler) RegisterRoutes(r *gin.Engine) {
@@ -43,8 +42,14 @@ func (h *Handler) ShowNameForm(c *gin.Context) {
 }
 
 func (h *Handler) StartGame(c *gin.Context) {
-	firstname := c.PostForm("firstname")
-	data := h.svc.InitGame(firstname)
+	firstname := c.DefaultPostForm("firstname", "")
+	var name string
+	if firstname != "" {
+		name = firstname + "씨"
+	} else {
+		name = "엄마"
+	}
+	data := h.game.InitGame(name)
 	c.HTML(http.StatusOK, "game.html", data)
 }
 
@@ -57,7 +62,7 @@ func (h *Handler) SelectCandidate(c *gin.Context) {
 		return
 	}
 
-	result, err := h.svc.ProcessSelection(request.SelectedID)
+	result, err := h.game.ProcessSelection(request.SelectedID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

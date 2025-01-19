@@ -10,7 +10,7 @@
 
 <body>
     <div class="game-container">
-        <h1><span class="username">{{ .username }}</span>씨의 이상형 월드컵</h1>
+        <h1><span class="username">{{ .username }}</span>의 이상형 월드컵</h1>
         <div class="round-info">{{ .currentRound }}</div>
         <div class="progress">
             <div class="progress-bar" style="width: {{ .progress }}%"></div>
@@ -18,7 +18,7 @@
         <div class="candidates-container">
             {{ range .candidates }}
             <div class="candidate" onclick="selectCandidate('{{ .id }}')">
-                <img src="{{ .image }}" alt="{{ .name }}">
+                <img src="{{ .image }}" alt="{{ .name }}" onerror="this.src='/static/images/default.jpg'">
                 <div class="name">{{ .name }}</div>
             </div>
             {{ end }}
