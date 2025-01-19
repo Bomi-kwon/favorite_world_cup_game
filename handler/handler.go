@@ -20,6 +20,7 @@ func (h *Handler) RegisterRoutes(r *gin.Engine) {
 	r.GET("/", h.Home)
 	r.GET("/name", h.ShowNameForm)
 	r.POST("/start", h.StartGame)
+	r.GET("/game", h.ShowGame)
 	r.POST("/game/select", h.SelectCandidate)
 }
 
@@ -49,7 +50,16 @@ func (h *Handler) StartGame(c *gin.Context) {
 	} else {
 		name = "엄마"
 	}
-	data := h.game.InitGame(name)
+	h.game.InitGame(name)
+	c.Redirect(http.StatusSeeOther, "/game")
+}
+
+func (h *Handler) ShowGame(c *gin.Context) {
+	data := h.game.StartBattle()
+	if data == nil {
+		c.Redirect(http.StatusSeeOther, "/name")
+		return
+	}
 	c.HTML(http.StatusOK, "game.html", data)
 }
 

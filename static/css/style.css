@@ -186,20 +186,4 @@ h1 {
     padding: 8px;
     border-radius: 0 0 12px 12px;
     font-size: 16px;
-}
-
-.progress {
-    width: 90%;
-    max-width: 600px;
-    height: 8px;
-    background: #eee;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    background: #4CAF50;
-    width: 0%;
-    transition: width 0.3s ease;
 } 

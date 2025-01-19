@@ -87,6 +87,8 @@ func (g *Game) createCandidate(record []string) (*Candidate, error) {
 		return nil, fmt.Errorf("이미지 검색 실패: %v", err)
 	}
 
+	log.Printf("후보자 생성: Name=%s, Image=%s", celebName, imageURL)
+
 	return &Candidate{
 		ID:        celebId,
 		Name:      celebName,
@@ -105,8 +107,8 @@ func (g *Game) shuffleCandidates(candidates []*Candidate) {
 }
 
 // 라운드 시작 시 모든 후보의 isUsed 초기화
-func (g *Game) resetCandidatesStatus() {
-	for i := range g.candidates {
-		g.candidates[i].isUsed = false
+func (r *Round) resetCandidatesStatus() {
+	for i := range r.candidates {
+		r.candidates[i].isUsed = false
 	}
 }

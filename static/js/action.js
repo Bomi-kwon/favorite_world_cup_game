@@ -29,16 +29,30 @@ function selectCandidate(id) {
     fetch('/game/select', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ selectedId })
+        body: JSON.stringify({ selectedId: selectedId })
     })
         .then(response => response.json())
         .then(data => {
             if (data.finished) {
                 window.location.href = '/result';
             } else {
-                window.location.reload();
+                updateBattle(data);
             }
         });
+}
+
+function updateBattle(data) {
+    document.querySelector('.round-info').textContent =
+        `${data.currentRound} (${data.matchNumber}/${data.totalMatches})`;
+
+    const candidates = document.querySelectorAll('.candidate');
+    candidates[0].onclick = () => selectCandidate(data.currentBattle.Candidate1.ID);
+    candidates[0].querySelector('img').src = data.currentBattle.Candidate1.Image;
+    candidates[0].querySelector('.name').textContent = data.currentBattle.Candidate1.Name;
+
+    candidates[1].onclick = () => selectCandidate(data.currentBattle.Candidate2.ID);
+    candidates[1].querySelector('img').src = data.currentBattle.Candidate2.Image;
+    candidates[1].querySelector('.name').textContent = data.currentBattle.Candidate2.Name;
 } 

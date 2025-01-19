@@ -11,17 +11,20 @@
 <body>
     <div class="game-container">
         <h1><span class="username">{{ .username }}</span>의 이상형 월드컵</h1>
-        <div class="round-info">{{ .currentRound }}</div>
-        <div class="progress">
-            <div class="progress-bar" style="width: {{ .progress }}%"></div>
+        <div class="round-info">
+            {{ .currentRound }} ({{ .matchNumber }}/{{ .totalMatches }})
         </div>
         <div class="candidates-container">
-            {{ range .candidates }}
-            <div class="candidate" onclick="selectCandidate('{{ .id }}')">
-                <img src="{{ .image }}" alt="{{ .name }}" onerror="this.src='/static/images/default.jpg'">
-                <div class="name">{{ .name }}</div>
+            <div class="candidate" onclick="selectCandidate('{{ .currentBattle.Candidate1.ID }}')">
+                <img src="{{ .currentBattle.Candidate1.Image }}" alt="{{ .currentBattle.Candidate1.Name }}"
+                    onerror="this.src='/static/images/default.png'">
+                <div class="name">{{ .currentBattle.Candidate1.Name }}</div>
             </div>
-            {{ end }}
+            <div class="candidate" onclick="selectCandidate('{{ .currentBattle.Candidate2.ID }}')">
+                <img src="{{ .currentBattle.Candidate2.Image }}" alt="{{ .currentBattle.Candidate2.Name }}"
+                    onerror="this.src='/static/images/default.png'">
+                <div class="name">{{ .currentBattle.Candidate2.Name }}</div>
+            </div>
         </div>
     </div>
 
